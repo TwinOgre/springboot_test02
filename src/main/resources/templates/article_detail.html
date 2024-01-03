@@ -1,11 +1,13 @@
-<div> 게시글 상세</div>
-
-<h3>제목</h3>
-<div th:text="${article.title}"> </div>
-<br>
-<h3>내용</h3>
-<div th:text="${article.content}"> </div>
-<h5>등록일</h5>
-<div th:text="${article.createDate}"> </div>
-
-<a href="/article/list">Article 목록</a>
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container">
+    <div class="card">
+        <div class="card-header" th:text="${article.title}"></div>
+        <div class="card-body">
+            <div th:text="${article.content}"></div>
+            <br>
+            <span th:text="${#temporals.format(article.createDate, 'yyyy-MM-dd HH:mm')}" class="badge text-bg-light">Light</span>
+        </div>
+    </div>
+    <a class = "btn btn-primary" href="/article/list">Article 목록</a>
+</div>
+</html>

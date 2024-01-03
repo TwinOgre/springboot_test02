@@ -1,9 +1,19 @@
-<h1>Article List</h1>
-<ul th:each="article, loop : ${articleList}">
-    <li  th:text="${loop.count}"></li>
-    <a th:href="@{|/article/detail/${article.id}|}" th:text="${article.title}">
-    </a>
-    <li  th:text="${article.createDate}"> </li>
-</ul>
-
-<a href="/article/create">게시글 등록</a>
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container">
+    <h1>Article List</h1>
+    <table class="table">
+        <tr class="table-dark">
+            <th>번호</th>
+            <th>제목</th>
+            <th>생성일</th>
+        </tr>
+        <tr th:each="article, loop : ${articleList}">
+            <td th:text="${loop.count}">Mark</td>
+            <td><a th:href="@{|/article/detail/${article.id}|}" th:text="${article.title}"></td>
+            <td th:text="${#temporals.format(article.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <a type = "btn btn-primary"href="/article/create">게시글 등록</a>
+</div>
+</html>
