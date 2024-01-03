@@ -1,6 +1,7 @@
 package com.exam.test.article;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +14,10 @@ import java.util.List;
 public class ArticleController {
     private final ArticleService articleService;
     @GetMapping("/list")
-    public String list(Model model){
-        List<Article> articleList = this.articleService.findAll();
-        model.addAttribute("articleList",articleList);
+    public String list(Model model, @RequestParam(value ="page", defaultValue = "0") int page ){
+        Page<Article> paging = this.articleService.findAll(page);
+
+        model.addAttribute("paging",paging);
         return "article_list";
 
     }
